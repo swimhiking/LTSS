@@ -1,0 +1,28 @@
+﻿@model List<LTSS_Model.Models.Option>
+@{
+}
+
+<p>Some Testing Partial View Content 1</p>
+<table>
+    @foreach (var item in Model)
+    {
+
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.OptionId)</td>
+        <td>@Html.DisplayFor(modelItem => item.OptionCode)</td>
+        <td>@Html.EditorFor(modelItem => item.OptionDesc)</td>
+        <td>@Html.DisplayFor(modelItem => item.OptionClassId)</td>
+        <td>@Html.DisplayFor(modelItem => item.SortOrder)</td>
+
+        <td>@Html.EditorFor(modelItem => item.SuggestionMsg)</td>
+        <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+        <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+
+
+
+    </tr>
+
+
+    }
+
+</table>

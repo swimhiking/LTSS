@@ -1,0 +1,231 @@
+﻿
+@{
+    ViewData["Title"] = "Calculation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .toolbar.toolbar-bottom{
+        display:none!important;
+    }
+</style>
+<h1>Calculation</h1>
+
+<br />
+<p>
+    <label>Theme:</label>
+    <select id="theme_selector">
+        <option value="default" selected>Default</option>
+        <option value="arrows">Arrows</option>
+        <option value="dots">Dots</option>
+        <option value="progress">Progress</option>
+    </select>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" id="is_justified" value="1" checked />
+    <label for="is_justified">Justified</label>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <label>Animation:</label>
+    <select id="animation">
+        <option value="none">None</option>
+        <option value="fade">Fade</option>
+        <option value="slide-horizontal" selected>Slide Horizontal</option>
+        <option value="slide-vertical">Slide Vertical</option>
+        <option value="slide-swing">Slide Swing</option>
+    </select>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <label>Go To:</label>
+    <select id="got_to_step">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <label>External Buttons:</label>
+    <button class="btn btn-secondary" id="prev-btn" type="button">Go Previous</button>
+    <button class="btn btn-secondary" id="next-btn" type="button">Go Next</button>
+    <button class="btn btn-danger" id="reset-btn" type="button">Reset</button>
+</p>
+<br />
+
+
+<!-- SmartWizard html -->
+<div id="smartwizard">
+
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#step-1" data-repo="jquery-smarttab">
+                <strong>Step 1</strong><br />Calculate First Step Data
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#step-2" data-repo="smartwizard">
+                <strong>Step 2</strong><br />Calculate Second Step Data
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#step-3" data-repo="jquery-smartcart">
+                <strong>Step 3</strong><br />Calculate Third Step Data
+            </a>
+        </li>
+       
+    </ul>
+
+    <div class="tab-content">
+        <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
+        </div>
+        <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">         
+        </div>
+        <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
+        </div>
+       
+    </div>
+</div>
+
+<br /> &nbsp;
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/smartwizard/dist/js/jquery.smartWizard.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        // Toolbar extra buttons
+        var btnFinish = $('<button></button>').text('Finish')
+            .addClass('btn btn-info')
+            .on('click', function () { alert('Finish Clicked'); });
+        var btnCancel = $('<button></button>').text('Cancel')
+            .addClass('btn btn-danger')
+            .on('click', function () { $('#smartwizard').smartWizard("reset"); });
+
+        // Step show event
+        $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection, stepPosition) {
+            $("#prev-btn").removeClass('disabled');
+            $("#next-btn").removeClass('disabled');
+            if (stepPosition === 'first') {
+                $("#prev-btn").addClass('disabled');
+            } else if (stepPosition === 'last') {
+                $("#next-btn").addClass('disabled');
+            } else {
+                $("#prev-btn").removeClass('disabled');
+                $("#next-btn").removeClass('disabled');
+            }
+        });
+
+        $("#smartwizard").on("stepContent", function (e, anchorObject, stepIndex, stepDirection) {
+           
+            var ajaxURL = "";
+            if (stepIndex == 0) {
+                ajaxURL =  '@Url.Action("Tab1", "Home")';
+            } else if (stepIndex == 1) {
+                ajaxURL = '@Url.Action("Tab2", "Home")';
+            } else if (stepIndex == 2) {
+                ajaxURL = '@Url.Action("Tab3", "Home")';
+            } 
+
+
+            return new Promise((resolve, reject) => {
+
+                $.ajax({
+                    method: "GET",
+                    url: ajaxURL,
+                    beforeSend: function (xhr) {
+                        // Show the loader
+                        $('#smartwizard').smartWizard("loader", "show");
+                    }
+                }).done(function (res) {
+                    // console.log(res);
+                    resolve(res);
+
+                  //Hide the loader
+                    $('#smartwizard').smartWizard("loader", "hide");
+                }).fail(function (err) {
+
+                    // Reject the Promise with error message to show as tab content
+                    reject("An error loading the resource");
+
+                    // Hide the loader
+                    $('#smartwizard').smartWizard("loader", "hide");
+                });
+
+            })
+
+            //Hide the loader
+            $('#smartwizard').smartWizard("loader", "hide");
+        });
+
+
+        // Smart Wizard
+        $('#smartwizard').smartWizard({
+            selected: 0,
+            transition: {
+                animation: 'slide-horizontal', // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
+            },
+            toolbarSettings: {
+                toolbarPosition: 'both', // both bottom
+                toolbarExtraButtons: [btnFinish, btnCancel]
+            }
+        });
+
+        // External Button Events
+        $("#reset-btn").on("click", function () {
+            // Reset wizard
+            $('#smartwizard').smartWizard("reset");
+            return true;
+        });
+
+        $("#prev-btn").on("click", function () {
+            // Navigate previous
+            $('#smartwizard').smartWizard("prev");
+            return true;
+        });
+
+        $("#next-btn").on("click", function () {
+            // Navigate next
+            $('#smartwizard').smartWizard("next");
+            return true;
+        });
+
+
+        // Demo Button Events
+        $("#got_to_step").on("change", function () {
+            // Go to step
+            var step_index = $(this).val() - 1;
+            $('#smartwizard').smartWizard("goToStep", step_index);
+            return true;
+        });
+
+        $("#is_justified").on("click", function () {
+            // Change Justify
+            var options = {
+                justified: $(this).prop("checked")
+            };
+
+            $('#smartwizard').smartWizard("setOptions", options);
+            return true;
+        });
+
+        $("#animation").on("change", function () {
+            // Change theme
+            var options = {
+                transition: {
+                    animation: $(this).val()
+                },
+            };
+            $('#smartwizard').smartWizard("setOptions", options);
+            return true;
+        });
+
+        $("#theme_selector").on("change", function () {
+            // Change theme
+            var options = {
+                theme: $(this).val()
+            };
+            $('#smartwizard').smartWizard("setOptions", options);
+            return true;
+        });
+
+    });
+</script>
+

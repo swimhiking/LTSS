@@ -1,0 +1,9 @@
+C:\Users\sshen\source\repos\LTSS\LTSS.Utility\bin\Debug\netcoreapp3.1\LTSS.Utility.deps.json
+C:\Users\sshen\source\repos\LTSS\LTSS.Utility\bin\Debug\netcoreapp3.1\LTSS.Utility.dll
+C:\Users\sshen\source\repos\LTSS\LTSS.Utility\bin\Debug\netcoreapp3.1\LTSS.Utility.pdb
+C:\Users\sshen\source\repos\LTSS\LTSS.Utility\obj\Debug\netcoreapp3.1\LTSS.Utility.csprojAssemblyReference.cache
+C:\Users\sshen\source\repos\LTSS\LTSS.Utility\obj\Debug\netcoreapp3.1\LTSS.Utility.AssemblyInfoInputs.cache
+C:\Users\sshen\source\repos\LTSS\LTSS.Utility\obj\Debug\netcoreapp3.1\LTSS.Utility.AssemblyInfo.cs
+C:\Users\sshen\source\repos\LTSS\LTSS.Utility\obj\Debug\netcoreapp3.1\LTSS.Utility.csproj.CoreCompileInputs.cache
+C:\Users\sshen\source\repos\LTSS\LTSS.Utility\obj\Debug\netcoreapp3.1\LTSS.Utility.dll
+C:\Users\sshen\source\repos\LTSS\LTSS.Utility\obj\Debug\netcoreapp3.1\LTSS.Utility.pdb

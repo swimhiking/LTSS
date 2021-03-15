@@ -1,0 +1,9 @@
+C:\Users\sshen\source\repos\LTSS\LTSS_Model\bin\Debug\netcoreapp3.1\LTSS_Model.deps.json
+C:\Users\sshen\source\repos\LTSS\LTSS_Model\bin\Debug\netcoreapp3.1\LTSS_Model.dll
+C:\Users\sshen\source\repos\LTSS\LTSS_Model\bin\Debug\netcoreapp3.1\LTSS_Model.pdb
+C:\Users\sshen\source\repos\LTSS\LTSS_Model\obj\Debug\netcoreapp3.1\LTSS_Model.AssemblyInfoInputs.cache
+C:\Users\sshen\source\repos\LTSS\LTSS_Model\obj\Debug\netcoreapp3.1\LTSS_Model.AssemblyInfo.cs
+C:\Users\sshen\source\repos\LTSS\LTSS_Model\obj\Debug\netcoreapp3.1\LTSS_Model.csproj.CoreCompileInputs.cache
+C:\Users\sshen\source\repos\LTSS\LTSS_Model\obj\Debug\netcoreapp3.1\LTSS_Model.dll
+C:\Users\sshen\source\repos\LTSS\LTSS_Model\obj\Debug\netcoreapp3.1\LTSS_Model.pdb
+C:\Users\sshen\source\repos\LTSS\LTSS_Model\obj\Debug\netcoreapp3.1\LTSS_Model.csprojAssemblyReference.cache
